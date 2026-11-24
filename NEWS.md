@@ -151,6 +151,30 @@
   Legibility checked at 300px wide and side by side with the
   news-image-20261122 #2 winner.
 
+## Kit check (v2, commit fc626cf)
+- Local check 2026-11-24T03:58:53Z: **14 passed, 0 failed, 5 skipped,
+  5 checked at submission.** thinking_reproduces: 734 of 797 counted
+  lines authored (92.0%), main.py 12 authored lines; thinking_priced
+  passes on the 1 attached usage record; thinking_in_window passes
+  (all 378 timestamps after the 00:00 UTC opening).
+- Fix on the way: the first v2 bundle (sessions 588831df + 8f9d6cce)
+  FAILED thinking_reproduces — main.py had 0 authored lines, because
+  neither session wrote it. main.py was written by the v1 setup session
+  2a3d75c1 (3 write calls), which the v1 bundle had included and the
+  first v2 bundle left out. Rebuilt the bundle with all 3 sessions
+  (2a3d75c1 + 588831df + 8f9d6cce) and the check passes.
+- Bundle: transcripts.tar.gz, 938,406 bytes, sha256
+  4325488bd049ff5f557d197409b2f001dbdf901d253260b8241e5a5b474fbb58
+  (3 sessions, system prompt uploaded, no MCP servers).
+- NOT yet submitted by the builder: this subagent's own usage rows are
+  written only once its run completes, so the final bundle must be
+  rebuilt by the top-level agent (parent) with fresh usage rows for
+  agent 8f9d6cce-6d1f-4ceb-991c-2d16cc44887a, then submitted. Suggested
+  title: "Tuesday 24 November 2026 — world news in one image (v2)".
+  Submit commit fc626cf (or a later HEAD if NEWS.md is committed
+  after the check). Round 1 cutoff 2026-11-24T12:00:00Z; entries close
+  2026-11-26T00:00:00Z; result due 2026-12-10T08:00:00Z.
+
 ## Prediction (before submit)
 - Dev rate is NOT a signal (measured only against weak house images;
   20261122 v2 scored 98.39% in dev and 64% final). Judged on the

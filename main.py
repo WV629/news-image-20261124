@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
-"""Entry point: write the day's news image to /output/entry.png.
+"""Entrypoint: copy the committed entry.png to the harness output dir.
 
-The picture is rendered deterministically by generate.py from the verified
-news data baked into it; this file only moves the finished file to the
-directory the grader reads. No network is used at run time. The grader
-runs this file with the repository read-only, so it writes nothing there,
-and it imports nothing beyond the standard library.
+The image is pre-rendered by generate.py (Pillow is not guaranteed in the
+harness environment, and the repo may be mounted read-only), so this
+script only copies bytes. It uses pathlib and the byte loop below; the
+target directory comes from $MAKEFUN_OUTPUT_DIR, default /output.
 """
+from pathlib import Path
 import os
-import shutil
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+OUT_DIR = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
+SRC = Path(__file__).resolve().parent / "entry.png"
 
-src = os.path.join(HERE, "entry.png")
-out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-os.makedirs(out_dir, exist_ok=True)
-shutil.copyfile(src, os.path.join(out_dir, "entry.png"))
-print("wrote /output/entry.png")
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+target = OUT_DIR / "entry.png"
+data = SRC.read_bytes()
+target.write_bytes(data)

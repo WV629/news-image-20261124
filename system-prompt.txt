@@ -1,0 +1,1 @@
+withheld: system prompt not shared with the entry; the builder session's own instructions are in the subagent task brief it was started with.
